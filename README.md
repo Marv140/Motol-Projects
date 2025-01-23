@@ -1,14 +1,14 @@
 # Motol Projects
 
-Tento repozitář obsahuje různé školní projekty a úkoly související s vývojem IT oboru SPŠD Motol.
+Tento repozitář obsahuje různé školní projekty související s vývojem IT oboru SPŠD Motol.
 
 ## Přehled
 
-Sbírka vzdělávacích projektů, které ukazují různé programovací koncepty a implementace.
+Sbírka vzdělávacích projektů, které ukazují různé programovací koncepty a implementace. Využívají se na školních akcích školy.
 
 ## Funkčnost
 
-Asi jenom na motolských pořádných strojích
+Asi jenom na motolských pořádných strojích.
 
 ## Požadavky
 
@@ -20,4 +20,4 @@ Tento projekt je určen pouze pro vzdělávací účely.
 
 ## Kontakt
 
-Pro dotazy nemáte koho kontaktovat, projekty jsou vytvářeny anonymními členy.
+Kontakt není známý, projekty jsou vytvářeny anonymními členy.
