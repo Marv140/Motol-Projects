@@ -4,7 +4,7 @@ Tento repozitář obsahuje různé školní projekty související s vývojem IT
 
 ## Přehled
 
-Sbírka vzdělávacích projektů, které ukazují různé programovací koncepty a implementace. Využívají se na školních akcích školy.
+Sbírka vzdělávacích projektů, které ukazují různé programovací koncepty a implementace. Využívají se na akcích školy.
 
 ## Funkčnost
 
