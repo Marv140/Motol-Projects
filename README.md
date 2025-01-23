@@ -1,4 +1,4 @@
-# Motol Projekty
+# Motol Projects
 
 Tento repozitář obsahuje různé školní projekty a úkoly související s vývojem IT oboru SPŠD Motol.
 
