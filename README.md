@@ -20,4 +20,4 @@ Tento projekt je určen pouze pro vzdělávací účely.
 
 ## Kontakt
 
-Kontakt není známý, projekty jsou vytvářeny anonymními členy.
+Při jakémkoliv dotazu či problému nás kontaktujte na podatelna@sps-dopravni.cz
