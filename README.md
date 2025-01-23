@@ -1,4 +1,4 @@
-# Motol Projects
+# Motol Projects (MILUJEME PRŮMYSL NA MOTOLE)
 
 Tento repozitář obsahuje různé školní projekty související s vývojem IT oboru SPŠD Motol.
 
