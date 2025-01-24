@@ -32,4 +32,4 @@ def submit_answer():
         return jsonify({"result": "incorrect"})
 
 if __name__ == '__main__':
-    app.run(host="145.239.90.235", debug=True, port="25571")
+    app.run(host="0.0.0.0", debug=True, port="25571")
