@@ -48,4 +48,4 @@ def submit_answer():
         return jsonify({"result": "incorrect", "correct_language": correct_language, "score": session['score']})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True, port="25571")
