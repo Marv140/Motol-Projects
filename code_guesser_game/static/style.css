@@ -1,37 +1,49 @@
+/* Basic resets and body styling */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-}
-
-.game-container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#image-container img {
+  }
+  
+  /* Card styling */
+  .quiz-card {
+    border: none;
+    border-radius: 10px;
+  }
+  
+  /* Code image styling */
+  .code-image {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-#options-container button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#result {
-    font-size: 18px;
-    margin-top: 20px;
-    font-weight: bold;
-}
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Option buttons styling */
+  .option-button {
+    min-width: 100px;
+  }
+  
+  /* Result text styling */
+  #result {
+    font-size: 1.2rem;
+    min-height: 30px;
+  }
+  
+  /* Responsive tweaks (optional additional overrides) */
+  @media (max-width: 576px) {
+    .code-image {
+      max-width: 90%;
+    }
+  }
+  
