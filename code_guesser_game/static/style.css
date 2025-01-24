@@ -254,4 +254,22 @@
   body.dark footer {
     color: var(--text-dark);
   }
-  
+
+/* Editor container to keep the CodeMirror in place */
+#editor-container {
+  width: 100%;
+  max-width: 600px;
+  height: 450px;       /* or more if you want more lines visible */
+  margin: 0 auto 1.5rem;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+}
+
+.CodeMirror {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
