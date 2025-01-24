@@ -1,49 +1,257 @@
-/* Basic resets and body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+/* ========================
+   RESET & BASIC STYLES
+======================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   
-  /* Card styling */
-  .quiz-card {
-    border: none;
+  html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* =====================================
+     COLOR VARIABLES & THEME TRANSITIONS
+  ===================================== */
+  :root {
+    --primary-color: #ff6f61;           /* Main accent color */
+    --primary-color-hover: #ff4137;     /* Hover state for primary */
+    
+    --secondary-color: #4A90E2;         /* Secondary accent color */
+    --secondary-color-hover: #357ABD;   /* Hover for secondary */
+    
+    /* Light mode background and text */
+    --background-light: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+    --text-light: #333333;
+  
+    /* Dark mode background and text */
+    --background-dark: linear-gradient(135deg, #1b1b1b 0%, #333333 100%);
+    --text-dark: #f5f5f5;
+    
+    /* Glass-like container background colors */
+    --glass-light: rgba(255, 255, 255, 0.75);
+    --glass-dark: rgba(51, 51, 51, 0.75);
+    
+    /* Box shadows and transitions */
+    --box-shadow-light: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --box-shadow-dark: 0 8px 20px rgba(0, 0, 0, 0.5);
+    
+    --transition-speed: 0.4s;
+  }
+  
+  /* ===================================
+     BODY & GLOBAL THEME TRANSITIONS
+  =================================== */
+  body {
+    background: var(--background-light);
+    color: var(--text-light);
+    transition: background var(--transition-speed) ease,
+                color var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  /* DARK THEME */
+  body.dark {
+    background: var(--background-dark);
+    color: var(--text-dark);
+  }
+  
+  /* ==================================
+     GAME CONTAINER - GLASSMORPHISM
+  ================================== */
+  .game-container {
+    width: 600px;
+    max-width: 90%;
+    padding: 2rem;
+    border-radius: 16px;
+    
+    /* Glass effect background for both light/dark modes */
+    background: var(--glass-light);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow-light);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all var(--transition-speed) ease;
+  }
+  
+  /* Adjust glass background in dark mode */
+  body.dark .game-container {
+    background: var(--glass-dark);
+    box-shadow: var(--box-shadow-dark);
+  }
+  
+  /* ==================================
+     HEADINGS & DECORATIVE ELEMENTS
+  ================================== */
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    color: inherit;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  /* Decorative line under heading */
+  h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+  
+  /* ============================
+     IMAGE CONTAINER & IMAGE
+  ============================ */
+  #image-container {
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
     border-radius: 10px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  /* Code image styling */
-  .code-image {
-    max-width: 100%;
+  #image-container img {
+    width: 100%;
     height: auto;
-    transition: opacity 0.3s ease;
+    object-fit: cover;
+    transition: transform var(--transition-speed) ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
-  /* Fade-in animation */
-  .fade-in {
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+  #image-container img:hover {
+    transform: scale(1.04);
   }
   
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+  /* =============================
+     OPTIONS (LANGUAGE BUTTONS)
+  ============================= */
+  #options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
   
-  /* Option buttons styling */
-  .option-button {
-    min-width: 100px;
+  #options-container button {
+    flex: 1 1 130px;
+    max-width: 200px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform var(--transition-speed) ease,
+                background var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
   }
   
-  /* Result text styling */
+  #options-container button:hover {
+    background: var(--primary-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
+  }
+  
+  /* =====================
+     RESULT TEXT
+  ===================== */
   #result {
+    min-height: 24px;
     font-size: 1.2rem;
-    min-height: 30px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    transition: color var(--transition-speed) ease;
   }
   
-  /* Responsive tweaks (optional additional overrides) */
-  @media (max-width: 576px) {
-    .code-image {
-      max-width: 90%;
-    }
+  #result.correct {
+    color: #28a745;
+  }
+  
+  #result.incorrect {
+    color: #dc3545;
+  }
+  
+  /* =====================
+     NEXT BUTTON
+  ===================== */
+  #next-button {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform var(--transition-speed) ease,
+                background var(--transition-speed) ease,
+                box-shadow var(--transition-speed) ease;
+  }
+  
+  #next-button:hover {
+    background: var(--secondary-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+  }
+  
+  /* ====================
+     THEME TOGGLE BTN
+  ==================== */
+  #theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color var(--transition-speed) ease,
+                transform var(--transition-speed) ease;
+  }
+  
+  #theme-toggle:hover {
+    transform: scale(1.15);
+  }
+  
+  /* Color in dark mode */
+  body.dark #theme-toggle {
+    color: var(--text-dark);
+  }
+  
+  /* ====================
+     FOOTER
+  ==================== */
+  footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--text-light);
+    transition: color var(--transition-speed) ease;
+  }
+  
+  body.dark footer {
+    color: var(--text-dark);
   }
   

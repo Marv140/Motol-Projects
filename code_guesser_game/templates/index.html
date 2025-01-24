@@ -1,76 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SPŠD - Uhádni Programovací Jazyk</title>
-  <!-- Bootstrap CSS -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeueRElGQ19f4utLDx9X76Yh8fQ3VpOcIhWJWxmeTZ6bNBEf"
-    crossorigin="anonymous"
-  >
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Your main stylesheet -->
   <link rel="stylesheet" href="/static/style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/images/icon.gif" type="image/gif">
 </head>
-<body class="bg-light d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#">Uhádni Programovací Jazyk</a>
+<body>
+  <button id="theme-toggle" aria-label="Přepnout režim">
+    <i class="fas fa-sun"></i>
+  </button>
+  
+  <div class="game-container">
+    <h1><i class="fas fa-code"></i> Uhádni Programovací Jazyk</h1>
+    <div id="image-container">
+      <img id="code-image" src="" alt="Code Image">
     </div>
-  </nav>
-
-  <div class="container py-5 flex-grow-1">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-        <div class="card shadow quiz-card">
-          <div class="card-body text-center">
-            <h1 class="card-title mb-4">Uhádni Programovací Jazyk</h1>
-
-            <!-- Scoreboard -->
-            <div class="mb-3">
-              <span class="fw-bold">Skóre:</span> 
-              <span id="score">0</span>
-            </div>
-
-            <!-- Image container -->
-            <div id="image-container" class="mb-4">
-              <img
-                id="code-image"
-                src=""
-                alt="Code Image"
-                class="img-fluid rounded border p-2 code-image fade-in"
-              >
-            </div>
-
-            <!-- Options container -->
-            <div id="options-container" class="d-flex flex-wrap justify-content-center gap-2 mb-3"></div>
-
-            <!-- Result text -->
-            <p id="result" class="fw-bold fs-5"></p>
-
-            <!-- Next button -->
-            <button id="next-button" class="btn btn-primary" style="display: none;">
-              Další
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="options-container"></div>
+    <p id="result"></p>
+    <button id="next-button" style="display: none;">Další</button>
   </div>
 
-  <footer class="bg-dark text-white py-3 mt-auto">
-    <div class="container text-center">
-      <p class="m-0">Created by Motolský Ajťáci</p>
-    </div>
+  <footer>
+    <p>Created by Motolský Ajťáci &copy; 2025</p>
   </footer>
 
-  <!-- Bootstrap Bundle with Popper -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pp1ZW9KZpGptEEldZPt/YWQDam57hK79HI05P8VVAsNa3bCz3npJ5Vxz7F5c9RRJ"
-    crossorigin="anonymous"
-  ></script>
+  <!-- JavaScript (FontAwesome, your script) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
   <script src="/static/script.js"></script>
 </body>
 </html>
