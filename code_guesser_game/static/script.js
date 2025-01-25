@@ -130,7 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
         resultText.textContent = "Správně!";
         resultText.className = "correct";
       } else {
-        resultText.textContent = `Špatně... Správně je ${data.correct_language}.`;
+        // resultText.textContent = `Špatně... Správně je ${data.correct_language}.`;
+        resultText.textContent = `Špatně... Zkus to znovu.`;
         resultText.className = "incorrect";
       }
       // Show next
