@@ -1,42 +1,29 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <title>SPŠD - Uhádni Prg. Jazyk</title>
-
-  <!-- Responsive viewport -->
+  <meta charset="UTF-8">
+  <title>SPŠD - Uhádni PRG Jazyk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CodeMirror CSS & a theme (e.g., "material") -->
-   ico
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css" 
-  />
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material.min.css" 
-  />
-  <link rel="icon" href="/static/icon.png" type="image/png">
-  <!-- Our own stylesheet -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- CodeMirror CSS & Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material.min.css">
 
-  <!-- Font Awesome (optional for icons) -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  >
+  <!-- Your main stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="/static/icon.png" type="image/png">
+  <!-- FontAwesome for icons (optional) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- Dark mode toggle -->
   <button id="theme-toggle" aria-label="Přepnout režim">
-    <i class="fas fa-sun"></i>  
+    <i class="fas fa-sun"></i>
   </button>
 
   <div class="game-container">
     <h1><i class="fas fa-code"></i> Uhádni Programovací Jazyk</h1>
 
-    <!-- Editor container -->
+    <!-- CodeMirror editor container -->
     <div id="editor-container">
       <div id="code-editor"></div>
     </div>
@@ -50,25 +37,16 @@
     <p>Created by Motolský Ajťáci &copy; 2025</p>
   </footer>
 
-  <!-- CodeMirror JS + language modes -->
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"
-  ></script>
-  <!-- Language modes for Python, JS, C++ (clike), Ruby, etc. -->
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/python/python.min.js"
-  ></script>
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"
-  ></script>
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/clike/clike.min.js"
-  ></script>
-  <script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/ruby/ruby.min.js"
-  ></script>
+  <!-- CodeMirror Core + some language modes (Python, JS, C++...) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/clike/clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/ruby/ruby.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/xml/xml.min.js"></script>
+  <!-- etc. Add more if you have more languages -->
 
-  <!-- Your JS -->
+  <!-- Your script -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

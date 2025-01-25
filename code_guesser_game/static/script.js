@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Grab references
+  // References
   const optionsContainer = document.getElementById("options-container");
   const resultText       = document.getElementById("result");
   const nextButton       = document.getElementById("next-button");
   const themeToggle      = document.getElementById("theme-toggle");
   const icon             = themeToggle.querySelector("i");
 
-  // =====================
-  // 1) DARK MODE
-  // =====================
+  // Dark Mode Setup
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark");
@@ -26,51 +24,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // =====================
-  // 2) CODEMIRROR INIT
-  // =====================
+  // Initialize CodeMirror
   const editorEl = document.getElementById("code-editor");
-  // Create our scrollable editor
   const editor = CodeMirror(editorEl, {
-    value: "",              // We'll set the text after fetch
-    mode: "python",         // Default fallback
+    value: "",
+    mode: "python",     // fallback
     lineNumbers: true,
-    theme: "material",      // Matches the .css theme
-    readOnly: false,        // Let user scroll and edit
+    theme: "material",  // must match the .css theme
+    readOnly: false
   });
 
-  // Map from language to CodeMirror mode
+  // Simple map from your snippet’s language to CodeMirror mode
   const languageMap = {
     "Python": "python",
     "JavaScript": "javascript",
     "C++": "text/x-c++src",
     "Ruby": "ruby",
-    "Java": "text/x-java"
+    "Java": "text/x-java",
+    // Add more if needed, e.g. "holyC", "C#", "React", etc.
   };
 
-  // =====================
-  // 3) LOAD A QUESTION
-  // =====================
+  // Fetch and display a question
   async function loadQuestion() {
     try {
       const response = await fetch("/get-question");
-      const data     = await response.json();
-      // data = { code: "...", language: "Python" }
-
-      // Set the editor text
+      const data = await response.json();
+    
+      // If language === null => no more questions
+      if (data.language === null) {
+        editor.setValue(data.code);
+        optionsContainer.innerHTML = "";
+        optionsContainer.style.display = "none";
+        nextButton.style.display = "none";
+        return;
+      }
+    
+      // Otherwise show the snippet
       editor.setValue(data.code);
-
-      // Update syntax highlighting mode
-      const cmMode = languageMap[data.language] || "python";
-      editor.setOption("mode", cmMode);
-
-      // Create answer buttons
       createOptionButtons(data.language);
 
-      // Clear old result
+      // Reset result and hide 'Next'
       resultText.textContent = "";
       resultText.className = "";
       nextButton.style.display = "none";
+      optionsContainer.style.display = "flex";
     } catch (error) {
       console.error("Error loading question:", error);
       resultText.textContent = "Chyba při načítání otázky.";
@@ -78,42 +75,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // =====================
-  // 4) CREATE ANSWER BUTTONS
-  // =====================
+  // Master list of possible languages
+  const ALL_LANGUAGES = ["Python", "JavaScript", "C++", "Ruby", "Java", "Lua"];
+
+  // Create 3 options: correct + 2 distractors
   function createOptionButtons(correctLanguage) {
     optionsContainer.innerHTML = "";
-    const languages = ["Python", "JavaScript", "C++", "Ruby", "Java"];
 
-    languages.forEach(lang => {
+    const distractors = ALL_LANGUAGES.filter(lang => lang !== correctLanguage);
+    shuffleArray(distractors);
+    const chosenDistractors = distractors.slice(0, 2);
+
+    const finalOptions = [correctLanguage, ...chosenDistractors];
+    shuffleArray(finalOptions);
+
+    finalOptions.forEach(lang => {
       const btn = document.createElement("button");
       btn.textContent = lang;
       btn.addEventListener("click", () => {
-        // Disable all buttons to lock in choice
         disableAllButtons();
-        // Submit user’s guess
         submitAnswer(lang, correctLanguage);
       });
       optionsContainer.appendChild(btn);
     });
   }
 
-  function disableAllButtons() {
-    const buttons = optionsContainer.querySelectorAll("button");
-    buttons.forEach(btn => {
-      btn.disabled = true;
-    });
+  // Shuffle array (Fisher–Yates)
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
   }
 
-  // =====================
-  // 5) SUBMIT ANSWER
-  // =====================
+  function disableAllButtons() {
+    const buttons = optionsContainer.querySelectorAll("button");
+    buttons.forEach(btn => (btn.disabled = true));
+  }
+
+  // Submit user's guess
   async function submitAnswer(selectedLanguage, correctLanguage) {
     try {
       const response = await fetch("/submit-answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
           language: selectedLanguage,
           correct_language: correctLanguage
         })
@@ -127,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         resultText.textContent = `Špatně... Správně je ${data.correct_language}.`;
         resultText.className = "incorrect";
       }
-      // Show 'Next' button
+      // Show next
       nextButton.style.display = "inline-block";
     } catch (error) {
       console.error("Error submitting answer:", error);
@@ -136,11 +142,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // =====================
-  // 6) NEXT QUESTION
-  // =====================
+  // "Next" button -> load next question
   nextButton.addEventListener("click", loadQuestion);
 
-  // Initial load
+  // Initial question
   loadQuestion();
 });
