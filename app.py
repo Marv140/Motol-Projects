@@ -9,9 +9,22 @@ questions = LONG_QUESTIONS
 
 @app.route("/")
 def index():
-    # Clear the session so each new visit has a fresh quiz
-    session.clear()
     return render_template("index.html")
+
+@app.route('/code_guesser')
+def code_guesser():
+    session.clear()
+    return render_template('code_guesser.html')
+
+@app.route('/public_transport_guesser')
+def public_transport_guesser():
+    session.clear()
+    return render_template('coming_soon.html')
+
+@app.route('/coming_soon')
+def coming_soon():
+    session.clear()
+    return render_template('coming_soon.html')
 
 
 @app.route("/get-question", methods=["GET"])

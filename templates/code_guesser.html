@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>SPŠD - Uhádni Programovací Jazyk</title>
+  <title>Uhádni Programovací Jazyk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CodeMirror CSS & Theme -->
@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material.min.css">
 
   <!-- Your main stylesheet -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="icon" href="/static/icon.png" type="image/png">
+  <link rel="stylesheet" href="/static/css/code_guesser.css">
+  <link rel="icon" href="/static/images/icon.png" type="image/png">
   <!-- FontAwesome for icons (optional) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -47,6 +47,6 @@
   <!-- etc. Add more if you have more languages -->
 
   <!-- Your script -->
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="/static/js/code_guesser.js"></script>
 </body>
 </html>

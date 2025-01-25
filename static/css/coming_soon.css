@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.container {
+    text-align: center;
+}
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+.home-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.home-button:hover {
+    background-color: #0056b3;
+}
