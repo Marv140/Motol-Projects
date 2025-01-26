@@ -1,103 +1,96 @@
 import random
-from flask import Flask, render_template, session, jsonify, request
-from long_snippets import LONG_QUESTIONS  # your question data
+import flask
+import long_snippets
 
-app = Flask(__name__)
-app.secret_key = "some_secret_key"
+app = flask.Flask(__name__)
 
-questions = LONG_QUESTIONS
+# Set the secret key for sessions
+app.secret_key = "secret_keySIGMASIGMASKIBIDISIGMAsecret_keysecret_keysecret_keysecret_keysecret_keysecret_keysecret_keysecret_key"
+
+questions = long_snippets.LONG_QUESTIONS
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return flask.render_template("index.html")
 
 @app.route('/code_guesser')
 def code_guesser():
-    session.clear()
-    return render_template('code_guesser.html')
+    return flask.render_template('code_guesser.html')
 
 @app.route('/public_transport_guesser')
 def public_transport_guesser():
-    session.clear()
-    return render_template('coming_soon.html')
+    return flask.render_template('public_transport_guesser.html')
 
 @app.route('/coming_soon')
 def coming_soon():
-    session.clear()
-    return render_template('coming_soon.html')
+    return flask.render_template('coming_soon.html')
 
 
 @app.route("/get-question", methods=["GET"])
 def get_question():
-    # 1) Initialize session keys if missing
-    if "used_questions" not in session:
-        session["used_questions"] = []
-    if "current_question_index" not in session:
-        session["current_question_index"] = None
+    if "used_questions" not in flask.session:
+        flask.session["used_questions"] = []
+    if "current_question_index" not in flask.session:
+        flask.session["current_question_index"] = None
 
-    used = session["used_questions"]
-    current_idx = session["current_question_index"]
+    used = flask.session["used_questions"]
+    current_idx = flask.session["current_question_index"]
     all_indices = list(range(len(questions)))
 
-    # 2) If we already have a current question waiting for a correct answer, return it again
     if current_idx is not None:
-        return jsonify(questions[current_idx])
+        return flask.jsonify(questions[current_idx])
 
-    # 3) If no current question, pick from remaining
     remaining = [i for i in all_indices if i not in used]
 
-    # If no remaining, "quiz complete"
     if not remaining:
-        return jsonify({
+        return flask.jsonify({
             "code": "Sada hádanek dokončena!\nPro začátek stiskni F5",
             "language": None
         })
 
-    # Otherwise pick a new question at random
     chosen_index = random.choice(remaining)
-    session["current_question_index"] = chosen_index
-    # DO NOT add to used_questions yet. We only add it AFTER the user answers correctly.
+    flask.session["current_question_index"] = chosen_index
 
-    return jsonify(questions[chosen_index])
+    return flask.jsonify(questions[chosen_index])
 
 @app.route("/submit-answer", methods=["POST"])
 def submit_answer():
-    data = request.json
+    data = flask.request.json
     selected_language = data.get("language")
     correct_language  = data.get("correct_language")
 
-    # Initialize counters if missing
-    if "score" not in session:
-        session["score"] = 0
-    if "questions_answered" not in session:
-        session["questions_answered"] = 0
-    if "used_questions" not in session:
-        session["used_questions"] = []
-    if "current_question_index" not in session:
-        session["current_question_index"] = None
+    if "score" not in flask.session:
+        flask.session["score"] = 0
+    if "questions_answered" not in flask.session:
+        flask.session["questions_answered"] = 0
+    if "used_questions" not in flask.session:
+        flask.session["used_questions"] = []
+    if "current_question_index" not in flask.session:
+        flask.session["current_question_index"] = None
 
-    session["questions_answered"] += 1
+    flask.session["questions_answered"] += 1
 
     if selected_language == correct_language:
-        session["score"] += 1
-        # Mark the current question as "used up" since we got it right
-        if session["current_question_index"] is not None:
-            session["used_questions"].append(session["current_question_index"])
-        # Clear the current question so the next /get-question picks a new one
-        session["current_question_index"] = None
+        flask.session["score"] += 1
+        if flask.session["current_question_index"] is not None:
+            flask.session["used_questions"].append(flask.session["current_question_index"])
+        flask.session["current_question_index"] = None
 
-        return jsonify({
+        return flask.jsonify({
             "result": "correct",
-            "score": session["score"]
+            "score": flask.session["score"]
         })
     else:
-        # We do NOT change current_question_index or used_questions,
-        # so next time /get-question is called, the user sees the SAME snippet.
-        return jsonify({
+        return flask.jsonify({
             "result": "incorrect",
             "correct_language": correct_language,
-            "score": session["score"]
+            "score": flask.session["score"]
         })
+
+@app.route("/reset-quiz", methods=["POST"])
+def reset_quiz():
+    flask.session.clear()  # Clear the session to reset progress
+    return "", 204  # Respond with no content
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=25571)

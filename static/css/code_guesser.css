@@ -1,278 +1,243 @@
-/* ========================
-   RESET & BASIC STYLES
-======================== */
+/* =====================================
+   RESET & FULLSCREEN CENTERING
+===================================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html, body {
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  /* =====================================
-     COLOR VARIABLES & THEME TRANSITIONS
-  ===================================== */
-  :root {
-    --primary-color: #ff6f61;           /* Main accent color */
-    --primary-color-hover: #ff4137;     /* Hover state for primary */
-    
-    --secondary-color: #4A90E2;         /* Secondary accent color */
-    --secondary-color-hover: #357ABD;   /* Hover for secondary */
-    
-    /* Light mode background and text */
-    --background-light: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
-    --text-light: #333333;
-  
-    /* Dark mode background and text */
-    --background-dark: linear-gradient(135deg, #1b1b1b 0%, #333333 100%);
-    --text-dark: #f5f5f5;
-    
-    /* Glass-like container background colors */
-    --glass-light: rgba(255, 255, 255, 0.75);
-    --glass-dark: rgba(51, 51, 51, 0.75);
-    
-    /* Box shadows and transitions */
-    --box-shadow-light: 0 8px 16px rgba(0, 0, 0, 0.15);
-    --box-shadow-dark: 0 8px 20px rgba(0, 0, 0, 0.5);
-    
-    --transition-speed: 0.4s;
-  }
-  
-  /* ===================================
-     BODY & GLOBAL THEME TRANSITIONS
-  =================================== */
-  body {
-    background: var(--background-light);
-    color: var(--text-light);
-    transition: background var(--transition-speed) ease,
-                color var(--transition-speed) ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
-  
-  /* DARK THEME */
-  body.dark {
-    background: var(--background-dark);
-    color: var(--text-dark);
-  }
-  
-  /* ==================================
-     GAME CONTAINER - GLASSMORPHISM
-  ================================== */
-  .game-container {
-    width: 600px;
-    max-width: 90%;
-    padding: 2rem;
-    border-radius: 16px;
-    
-    /* Glass effect background for both light/dark modes */
-    background: var(--glass-light);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--box-shadow-light);
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all var(--transition-speed) ease;
-  }
-  
-  /* Adjust glass background in dark mode */
-  body.dark .game-container {
-    background: var(--glass-dark);
-    box-shadow: var(--box-shadow-dark);
-  }
-  
-  /* ==================================
-     HEADINGS & DECORATIVE ELEMENTS
-  ================================== */
-  h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    text-align: center;
-    color: inherit;
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  /* Decorative line under heading */
-  h1::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--primary-color);
-    margin: 1rem auto 0;
-    border-radius: 2px;
-  }
-  
-  /* ============================
-     IMAGE CONTAINER & IMAGE
-  ============================ */
-  #image-container {
-    width: 100%;
-    max-height: 300px;
-    overflow: hidden;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #image-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform var(--transition-speed) ease;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  
-  #image-container img:hover {
-    transform: scale(1.04);
-  }
-  
-  /* =============================
-     OPTIONS (LANGUAGE BUTTONS)
-  ============================= */
-  #options-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  #options-container button {
-    width: 100%;
-    max-width: 500px;
-    background: var(--primary-color);
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1rem;
-    font-size: 1.1rem;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform var(--transition-speed) ease,
-                background var(--transition-speed) ease,
-                box-shadow var(--transition-speed) ease;
-  }
-  
-  #options-container button:hover {
-    background: var(--primary-color-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 111, 97, 0.3);
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  
-  /* =====================
-     RESULT TEXT
-  ===================== */
-  #result {
-    min-height: 24px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    transition: color var(--transition-speed) ease;
-  }
-  
-  #result.correct {
-    color: #28a745;
-  }
-  
-  #result.incorrect {
-    color: #dc3545;
-  }
-  
-  /* =====================
-     NEXT BUTTON
-  ===================== */
-  #next-button {
-    background: var(--secondary-color);
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: transform var(--transition-speed) ease,
-                background var(--transition-speed) ease,
-                box-shadow var(--transition-speed) ease;
-  }
-  
-  #next-button:hover {
-    background: var(--secondary-color-hover);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
-  }
-  
-  /* ====================
-     THEME TOGGLE BTN
-  ==================== */
-  #theme-toggle {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-light);
-    transition: color var(--transition-speed) ease,
-                transform var(--transition-speed) ease;
-  }
-  
-  #theme-toggle:hover {
-    transform: scale(1.15);
-  }
-  
-  /* Color in dark mode */
-  body.dark #theme-toggle {
-    color: var(--text-dark);
-  }
-  
-  /* ====================
-     FOOTER
-  ==================== */
-  footer {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    text-align: center;
-    color: var(--text-light);
-    transition: color var(--transition-speed) ease;
-  }
-  
-  body.dark footer {
-    color: var(--text-dark);
-  }
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #0f0c29; /* Dark gradient */
+  background: radial-gradient(circle at bottom, #0f0c29, #302b63, #24243e);
+  overflow: hidden; /* No scroll bars */
+  color: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* Editor container to keep the CodeMirror in place */
+/* =====================================
+   PARTICLE BACKGROUND
+===================================== */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/static/images/particles.gif') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* Subtle effect */
+  z-index: 0;
+}
+
+/* =====================================
+   FIXED HEADER
+===================================== */
+.topbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.site-title {
+  font-size: 1.4rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* =====================================
+   FIXED FOOTER
+===================================== */
+footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.85rem;
+  z-index: 999;
+}
+
+/* =====================================
+   GAME CONTAINER
+===================================== */
+.game-container {
+  position: relative;
+  z-index: 1; /* Above the background */
+  width: 80%;
+  max-width: 800px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1); /* Glass effect */
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* =====================================
+   HEADER STYLING
+===================================== */
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+}
+
+/* =====================================
+   CODE EDITOR CONTAINER
+===================================== */
 #editor-container {
   width: 100%;
   max-width: 600px;
-  height: 450px;       /* or more if you want more lines visible */
-  margin: 0 auto 1.5rem;
-  border-radius: 8px;
+  height: 500px; /* Adjustable height for large snippets */
+  margin: 20px auto;
+  border-radius: 10px;
   overflow: auto;
-  position: relative;
+  background: #2c2f33; /* Dark background for contrast */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .CodeMirror {
-  width: 100%;
   height: 100%;
   font-size: 14px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 10px;
+  color: #dcdcdc; /* Light text for dark background */
+}
+
+.CodeMirror-scroll {
+  max-height: 100%;
+  overflow: auto !important;
+}
+
+.CodeMirror-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.CodeMirror-scroll::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+
+.CodeMirror-scroll::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+
+/* =====================================
+   OPTIONS BUTTONS
+===================================== */
+#options-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#options-container button {
+  width: 100%;
+  max-width: 500px;
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+#options-container button:hover {
+  background: linear-gradient(90deg, #3333ff, #ff00cc);
+  transform: scale(1.05);
+}
+
+/* =====================================
+   RESULT TEXT
+===================================== */
+#result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#result.correct {
+  color: #28a745;
+}
+
+#result.incorrect {
+  color: #dc3545;
+}
+
+/* =====================================
+   NEXT BUTTON
+===================================== */
+#next-button {
+  background: linear-gradient(90deg, #4A90E2, #357ABD);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+#next-button:hover {
+  background: linear-gradient(90deg, #357ABD, #4A90E2);
+  transform: scale(1.05);
+}
+
+/* =====================================
+   THEME TOGGLE BUTTON
+===================================== */
+#theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.2);
 }

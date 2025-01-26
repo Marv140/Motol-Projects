@@ -3,41 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motolský Ajťáci</title>
+  <title>SPŠD - Main Menu</title>
   <link rel="stylesheet" href="/static/css/index.css">
-  <link rel="icon" href="/static/images/icon.png" type="image/png">
+  <link rel="icon" href="/static/images/icon.png">
 </head>
 <body>
-  <h1>Motolský Ajťáci</h1>
-  <div class="grid">
-    <div class="card">
-      <a href="code_guesser">
-        <img src="static/images/games/code_guesser.png" alt="Code Guesser">
-        <div class="card-content">
-          <h2 class="card-title">Code Guesser</h2>
-        </div>
-      </a>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="/static/images/icon.png" alt="Logo" class="logo">
+      <h1 class="site-title">Hlavní Menu</h1>
     </div>
-    <div class="card">
-      <a href="public_transport_guesser">
-        <!-- <img src="" alt=""> -->
-        <div class="card-content">
-          <h2 class="card-title">Public Transport Guesser</h2>
-        </div>
-      </a>
-    </div>
-    <div class="card">
-      <div>
-        <!-- <img src="" alt="Coming Soon"> -->
-        <div class="card-content">
-          <h2 class="card-title">Coming Soon...</h2>
-        </div>
-      </div>
-    </div>
+  </header>
 
-    <footer>
-      <p>Spráskáno ve škole v učebně 4 &copy; 2025 Motolský Ajťáci</p>
-    </footer>
-  </div>
+  <!-- Main Content -->
+  <main class="cover-grid">
+    <!-- Cover 1 -->
+    <a class="cover-block" href="/coming_soon" style="--bg-url: url('/static/images/games/mhd_guesser.jpg');">
+      <div class="cover-overlay"></div>
+      <div class="cover-text">
+        <h2>MHD Guesser</h2>
+      </div>
+    </a>
+    <!-- Cover 2 -->
+    <a class="cover-block" href="/code_guesser" style="--bg-url: url('/static/images/games/code_guesser.jpg');">
+      <div class="cover-overlay"></div>
+      <div class="cover-text">
+        <h2>Code Guesser</h2>
+      </div>
+    </a>
+
+    <!-- Cover 3 -->
+    <a class="cover-block" href="/coming_soon" style="--bg-url: url('/static/images/games/coming_soon.jpg');">
+      <div class="cover-overlay"></div>
+      <div class="cover-text">
+        <h2>Již Brzy...</h2>
+      </div>
+    </a>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Spráskáno ve škole v učebně 4 &copy; 2025 Motolský Ajťáci</p>
+  </footer>
 </body>
 </html>

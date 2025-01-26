@@ -9,10 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material.min.css">
 
-  <!-- Your main stylesheet -->
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="/static/css/code_guesser.css">
   <link rel="icon" href="/static/images/icon.png" type="image/png">
-  <!-- FontAwesome for icons (optional) -->
+
+  <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -23,30 +24,29 @@
   <div class="game-container">
     <h1><i class="fas fa-code"></i> Uhádni Programovací Jazyk</h1>
 
-    <!-- CodeMirror editor container -->
+    <!-- CodeMirror Editor Container -->
     <div id="editor-container">
       <div id="code-editor"></div>
     </div>
 
     <div id="options-container"></div>
     <p id="result"></p>
-    <button id="next-button" style="display: none;">Další</button>
+    <button id="next-button" style="display: none; width: 100%;">Další</button>
   </div>
 
   <footer>
     <p>Created by Motolský Ajťáci &copy; 2025</p>
   </footer>
 
-  <!-- CodeMirror Core + some language modes (Python, JS, C++...) -->
+  <!-- CodeMirror Core & Modes -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/python/python.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/clike/clike.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/ruby/ruby.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/xml/xml.min.js"></script>
-  <!-- etc. Add more if you have more languages -->
 
-  <!-- Your script -->
+  <!-- Main JavaScript -->
   <script src="/static/js/code_guesser.js"></script>
 </body>
 </html>

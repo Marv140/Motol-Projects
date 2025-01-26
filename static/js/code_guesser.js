@@ -1,69 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
   // References
   const optionsContainer = document.getElementById("options-container");
-  const resultText       = document.getElementById("result");
-  const nextButton       = document.getElementById("next-button");
-  const themeToggle      = document.getElementById("theme-toggle");
-  const icon             = themeToggle.querySelector("i");
+  const resultText = document.getElementById("result");
+  const nextButton = document.getElementById("next-button");
 
-  // Dark Mode Setup
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark");
-    icon.classList.replace("fa-sun", "fa-moon");
-  }
+  let correctLanguage = null;
+  let currentQuestion = null;
 
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    if (document.body.classList.contains("dark")) {
-      localStorage.setItem("theme", "dark");
-      icon.classList.replace("fa-sun", "fa-moon");
-    } else {
-      localStorage.setItem("theme", "light");
-      icon.classList.replace("fa-moon", "fa-sun");
-    }
-  });
-
-  // Initialize CodeMirror
+  // Initialize CodeMirror with scroll support
   const editorEl = document.getElementById("code-editor");
   const editor = CodeMirror(editorEl, {
     value: "",
-    mode: "python",     // fallback
+    mode: "python",
     lineNumbers: true,
-    theme: "material",  // must match the .css theme
-    readOnly: false
+    theme: "material", // Theme for the editor
+    readOnly: true,
+    lineWrapping: true, // Long lines will wrap
+    viewportMargin: Infinity, // Ensures proper scrolling
   });
 
-  // Simple map from your snippet’s language to CodeMirror mode
-  const languageMap = {
-    "Python": "python",
-    "JavaScript": "javascript",
-    "C++": "text/x-c++src",
-    "Ruby": "ruby",
-    "Java": "text/x-java",
-    // Add more if needed, e.g. "holyC", "C#", "React", etc.
-  };
+  // Supported languages for CodeMirror mapping
+  const ALL_LANGUAGES = ["Python", "JavaScript", "C++", "Ruby", "Java", "Lua"];
 
-  // Fetch and display a question
+  // Function to load a question from the server
   async function loadQuestion() {
     try {
       const response = await fetch("/get-question");
       const data = await response.json();
-    
-      // If language === null => no more questions
+
       if (data.language === null) {
-        editor.setValue(data.code);
-        optionsContainer.innerHTML = "";
-        optionsContainer.style.display = "none";
-        nextButton.style.display = "none";
+        finishQuiz();
         return;
       }
-    
-      // Otherwise show the snippet
-      editor.setValue(data.code);
-      createOptionButtons(data.language);
 
-      // Reset result and hide 'Next'
+      currentQuestion = data;
+      editor.setValue(data.code);
+      correctLanguage = data.language;
+      createOptionButtons(correctLanguage);
+
       resultText.textContent = "";
       resultText.className = "";
       nextButton.style.display = "none";
@@ -75,32 +49,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Master list of possible languages
-  const ALL_LANGUAGES = ["Python", "JavaScript", "C++", "Ruby", "Java", "Lua"];
-
-  // Create 3 options: correct + 2 distractors
+  // Create buttons for answer options
   function createOptionButtons(correctLanguage) {
     optionsContainer.innerHTML = "";
 
-    const distractors = ALL_LANGUAGES.filter(lang => lang !== correctLanguage);
+    const distractors = ALL_LANGUAGES.filter((lang) => lang !== correctLanguage);
     shuffleArray(distractors);
     const chosenDistractors = distractors.slice(0, 2);
 
     const finalOptions = [correctLanguage, ...chosenDistractors];
     shuffleArray(finalOptions);
 
-    finalOptions.forEach(lang => {
+    finalOptions.forEach((lang) => {
       const btn = document.createElement("button");
       btn.textContent = lang;
+      btn.classList.add("option-button");
       btn.addEventListener("click", () => {
         disableAllButtons();
+        optionsContainer.style.display = "none"; // Hide options after selection
         submitAnswer(lang, correctLanguage);
       });
       optionsContainer.appendChild(btn);
     });
   }
 
-  // Shuffle array (Fisher–Yates)
+  // Shuffle array for randomized options
   function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -108,33 +81,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Disable all option buttons
   function disableAllButtons() {
     const buttons = optionsContainer.querySelectorAll("button");
-    buttons.forEach(btn => (btn.disabled = true));
+    buttons.forEach((btn) => (btn.disabled = true));
   }
 
-  // Submit user's guess
+  // Submit the selected answer
   async function submitAnswer(selectedLanguage, correctLanguage) {
     try {
       const response = await fetch("/submit-answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           language: selectedLanguage,
-          correct_language: correctLanguage
-        })
+          correct_language: correctLanguage,
+        }),
       });
       const data = await response.json();
 
       if (data.result === "correct") {
         resultText.textContent = "Správně!";
         resultText.className = "correct";
+        nextButton.textContent = "Další";
+        nextButton.onclick = loadQuestion;
       } else {
-        // resultText.textContent = `Špatně... Správně je ${data.correct_language}.`;
-        resultText.textContent = `Špatně... Zkus to znovu.`;
+        resultText.textContent = "Špatně... Zkus to znovu.";
         resultText.className = "incorrect";
+        nextButton.textContent = "Znovu";
+        nextButton.onclick = () => {
+          createOptionButtons(correctLanguage); // Recreate shuffled options
+          resultText.textContent = "";
+          resultText.className = "";
+          nextButton.style.display = "none";
+          optionsContainer.style.display = "flex"; // Show options again
+        };
       }
-      // Show next
+
       nextButton.style.display = "inline-block";
     } catch (error) {
       console.error("Error submitting answer:", error);
@@ -143,9 +126,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // "Next" button -> load next question
+  // Handle the end of the quiz
+  function finishQuiz() {
+    editor.setValue("// Všechny otázky byly dokončeny!");
+    optionsContainer.innerHTML = "";
+    optionsContainer.style.display = "none";
+
+    resultText.textContent =
+      "Sada hádanek dokončena\nKlikněte na 'Restart' pro opakování.";
+    resultText.className = "complete";
+
+    nextButton.textContent = "Restart";
+    nextButton.style.display = "inline-block";
+    nextButton.onclick = restartQuiz;
+  }
+
+  // Restart the quiz
+  async function restartQuiz() {
+    try {
+      const response = await fetch("/reset-quiz", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        loadQuestion();
+      } else {
+        console.error("Failed to reset quiz.");
+      }
+    } catch (error) {
+      console.error("Error resetting quiz:", error);
+    }
+  }
+
   nextButton.addEventListener("click", loadQuestion);
 
-  // Initial question
+  // Start the quiz
   loadQuestion();
 });
