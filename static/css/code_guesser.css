@@ -28,7 +28,6 @@ body::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/static/images/particles.gif') no-repeat center center;
   background-size: cover;
   opacity: 0.2; /* Subtle effect */
   z-index: 0;
@@ -39,7 +38,8 @@ body::before {
 ===================================== */
 .topbar {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
@@ -71,7 +71,8 @@ body::before {
 ===================================== */
 footer {
   position: fixed;
-  bottom: 0; left: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 40px;
   background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
@@ -89,9 +90,9 @@ footer {
 .game-container {
   position: relative;
   z-index: 1; /* Above the background */
-  width: 80%;
+  width: 90%;
   max-width: 800px;
-  padding: 2rem;
+  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.1); /* Glass effect */
   border-radius: 16px;
   -webkit-backdrop-filter: blur(10px);
@@ -103,16 +104,31 @@ footer {
   gap: 1rem;
 }
 
+/* Responsive container adjustments for smaller screens */
+@media (max-width: 768px) {
+  .game-container {
+    width: 95%;
+    padding: 1rem;
+  }
+}
+
 /* =====================================
    HEADER STYLING
 ===================================== */
 h1 {
   font-family: 'Poppins', sans-serif;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
   text-align: center;
   color: #fff;
   text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.6rem;
+  }
 }
 
 /* =====================================
@@ -121,7 +137,7 @@ h1 {
 #editor-container {
   width: 100%;
   max-width: 600px;
-  height: 500px; /* Adjustable height for large snippets */
+  height: 300px; /* Adjustable height for large snippets */
   margin: 20px auto;
   border-radius: 10px;
   overflow: auto;
@@ -155,6 +171,15 @@ h1 {
   background: #888;
 }
 
+@media (max-width: 768px) {
+  #editor-container {
+    height: 250px; /* Reduce height for smaller screens */
+  }
+
+  .CodeMirror {
+    font-size: 12px; /* Smaller font size for better fit */
+  }
+}
 
 /* =====================================
    OPTIONS BUTTONS
@@ -186,6 +211,13 @@ h1 {
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+  #options-container button {
+    font-size: 1rem; /* Adjust font size for buttons */
+    padding: 0.5rem 0.75rem; /* Reduce padding */
+  }
+}
+
 /* =====================================
    RESULT TEXT
 ===================================== */
@@ -202,6 +234,12 @@ h1 {
 
 #result.incorrect {
   color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  #result {
+    font-size: 1rem; /* Reduce font size for result text */
+  }
 }
 
 /* =====================================
@@ -223,6 +261,13 @@ h1 {
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+  #next-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
 /* =====================================
    THEME TOGGLE BUTTON
 ===================================== */
@@ -240,4 +285,10 @@ h1 {
 
 #theme-toggle:hover {
   transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  #theme-toggle {
+    font-size: 1.2rem; /* Smaller toggle icon */
+  }
 }
