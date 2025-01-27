@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         resultText.textContent = "Špatně... Zkus to znovu.";
         resultText.className = "incorrect";
-        nextButton.textContent = "Znovu";
+        nextButton.textContent = "Zkusit Znovu";
         nextButton.onclick = () => {
           createOptionButtons(correctLanguage); // Recreate shuffled options
           resultText.textContent = "";
