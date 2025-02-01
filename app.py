@@ -22,7 +22,7 @@ if MAINTENANCE_MODE == True:
             return flask.redirect("/maintenance")
         
 @app.before_request
-def check_for_maintenance():
+def check_if_enabled_maintenance():
     if flask.request.path == "/maintenance":
         return flask.redirect("/")
 
