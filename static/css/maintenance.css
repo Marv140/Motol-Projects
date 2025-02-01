@@ -1,0 +1,145 @@
+/* =====================================
+   1) RESET & FULLSCREEN CENTERING
+===================================== */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background: #0f0c29; /* Dark gradient */
+    background: radial-gradient(circle at bottom, #0f0c29, #302b63, #24243e);
+    overflow: hidden;
+    color: #fff;
+    position: relative;
+}
+
+/* =====================================
+   2) PARTICLE BACKGROUND
+===================================== */
+body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/static/images/particles.gif') no-repeat center center;
+    background-size: cover;
+    opacity: 0.2; /* Subtle effect */
+    z-index: 0;
+}
+
+/* =====================================
+   3) MAIN CONTAINER
+===================================== */
+.container {
+    text-align: center;
+    z-index: 1; /* Above particles */
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* =====================================
+   4) HEADER STYLING
+===================================== */
+h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+    animation: neonGlow 2s infinite alternate;
+}
+
+/* =====================================
+   5) SUBTITLE PARAGRAPH (OPTIONAL)
+===================================== */
+p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    animation: floatUp 3s ease-in-out infinite alternate;
+}
+
+/* =====================================
+   6) BUTTON (WITH RIPPLE EFFECT)
+===================================== */
+.home-button {
+    position: relative;
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.3s, transform 0.2s;
+    z-index: 1;
+}
+
+.home-button:hover {
+    background: linear-gradient(90deg, #3333ff, #ff00cc);
+    transform: scale(1.1); /* Subtle pop effect */
+}
+
+/* Ripple Effect on Button */
+.home-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0.5;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+}
+
+.home-button:hover::after {
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+}
+
+/* =====================================
+   7) KEYFRAME ANIMATIONS
+===================================== */
+/* Fade-in for container */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating animation for paragraph */
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* Neon glowing effect */
+@keyframes neonGlow {
+    from {
+        text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099, 0 0 40px #ff00cc, 0 0 50px #ff00cc;
+    }
+    to {
+        text-shadow: 0 0 20px #ff0099, 0 0 30px #ff0099, 0 0 40px #ff00cc, 0 0 50px #ff00cc, 0 0 60px #ff00cc;
+    }
+}
