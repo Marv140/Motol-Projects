@@ -9,7 +9,7 @@ app.secret_key = "secret_keySIGMASIGMASKIBIDISIGMAsecret_keysecret_keysecret_key
 
 questions = long_snippets.LONG_QUESTIONS
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 
 if MAINTENANCE_MODE == True:
     @app.route("/maintenance")
@@ -20,11 +20,11 @@ if MAINTENANCE_MODE == True:
     def check_for_maintenance():
         if flask.request.path != "/maintenance" and not flask.request.path.startswith('/static/'):
             return flask.redirect("/maintenance")
-        
-@app.before_request
-def check_if_enabled_maintenance():
-    if flask.request.path == "/maintenance":
-        return flask.redirect("/")
+if not MAINTENANCE_MODE:
+    @app.before_request
+    def redirect_to_index():
+        if flask.request.path == "/maintenance":
+            return flask.redirect("/")
 
 @app.route("/")
 def index():
