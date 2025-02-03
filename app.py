@@ -2,7 +2,7 @@ import random
 import flask
 import long_snippets
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_folder='static')
 
 # Set the secret key for sessions
 app.secret_key = "secret_keySIGMASIGMASKIBIDISIGMAsecret_keysecret_keysecret_keysecret_keysecret_keysecret_keysecret_keysecret_key"
