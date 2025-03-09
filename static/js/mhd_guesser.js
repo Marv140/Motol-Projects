@@ -90,3 +90,16 @@ window.onload = function() {
 document.getElementById('close-popup').onclick = function() {
   document.getElementById('popup').style.display = 'none';
 };
+
+document.getElementById('fullscreen-button').addEventListener('click', function() {
+  const image = document.getElementById('question-image');
+  if (image.requestFullscreen) {
+    image.requestFullscreen();
+  } else if (image.mozRequestFullScreen) { // Firefox
+    image.mozRequestFullScreen();
+  } else if (image.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    image.webkitRequestFullscreen();
+  } else if (image.msRequestFullscreen) { // IE/Edge
+    image.msRequestFullscreen();
+  }
+});

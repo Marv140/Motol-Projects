@@ -34,16 +34,28 @@ def get_mhd_images():
         if os.path.isdir(city_dir):
             for filename in os.listdir(city_dir):
                 if filename.endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    images.append((city, os.path.join(city_dir, filename)))
+                    images.append((folder, os.path.join(city_dir, filename)))  # Use folder name instead of city name
     return images
 
 def create_mhd_question():
+    if "used_mhd_images" not in flask.session:
+        flask.session["used_mhd_images"] = []
+
     images = get_mhd_images()
-    if not images:
+    unused_images = [img for img in images if img[1] not in flask.session["used_mhd_images"]]
+
+    if not unused_images:
+        flask.session["used_mhd_images"] = []
+        unused_images = images
+
+    if not unused_images:
         return None
 
-    selected_image = random.choice(images)
-    correct_city = selected_image[0]
+    selected_image = random.choice(unused_images)
+    flask.session["used_mhd_images"].append(selected_image[1])
+
+    correct_folder = selected_image[0]
+    correct_city = next(city for city, folder in czech_cities if folder == correct_folder)
     options = random.sample([city for city, folder in czech_cities], 3)
     if correct_city not in options:
         options[random.randint(0, 2)] = correct_city
