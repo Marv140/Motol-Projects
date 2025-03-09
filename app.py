@@ -176,7 +176,7 @@ def get_mhd_question():
     question = create_mhd_question()
     if not question:
         return flask.jsonify({
-            "result": "No images available."
+            "result": "Nebyly nalezeny žádné obrázky."
         })
 
     return flask.jsonify(question)
