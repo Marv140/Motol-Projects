@@ -1,23 +1,23 @@
-# Motol Projects (MILUJEME PRŮMYSL NA MOTOLE)
+# Motol-Projects
 
-Tento repozitář obsahuje různé školní projekty související s vývojem IT oboru SPŠD Motol.
+This repository contains various school projects related to the development of the IT field at SPŠD Motol.
 
-## Přehled
+## Overview
 
-Sbírka vzdělávacích projektů, které ukazují různé programovací koncepty a implementace. Využívají se na akcích školy.
+A collection of educational projects that demonstrate various programming concepts and implementations. They are used at school events.
 
-## Funkčnost
+## Functionality
 
-Asi jenom na motolských pořádných strojích.
+Probably only on proper Motol machines.
 
-## Požadavky
+## Requirements
 
-- Více jak 5 IQ
+- All the requirements are in the requirements.txt file.
 
-## Licence
+## License
 
-Tento projekt je určen pouze pro vzdělávací účely.
+This project is intended for educational purposes only.
 
-## Kontakt
+## Contact
 
-Při jakémkoliv dotazu či problému nás kontaktujte na podatelna@sps-dopravni.cz
+In case of any questions or problems, it is not possible to contact anyone.
