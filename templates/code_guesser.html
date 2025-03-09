@@ -17,22 +17,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <button id="home-button" aria-label="Domů" onclick="window.location.href='/'">
-    <i class="fas fa-home"></i>
-  </button>
-
-  <div class="game-container">
-    <h1><i class="fas fa-code"></i> Uhádni Programovací Jazyk</h1>
-
-    <!-- CodeMirror Editor Container -->
-    <div id="editor-container">
-      <div id="code-editor"></div>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="/static/images/icon.webp" alt="Logo" class="logo">
+      <h1 class="site-title">Code Guesser</h1>
     </div>
+    <button id="home-button" class="home-button" aria-label="Domů" onclick="window.location.href='/'">
+      <i class="fas fa-home"></i>
+    </button>
+  </header>
 
-    <div id="options-container"></div>
-    <p id="result"></p>
-    <button id="next-button" style="display: none; width: 100%;">Další</button>
-  </div>
+  <main class="main-content"></main>
+    <div class="game-container">
+      <h1><i class="fas fa-code"></i> Uhádni Programovací Jazyk</h1>
+
+      <!-- CodeMirror Editor Container -->
+      <div id="editor-container">
+        <div id="code-editor"></div>
+      </div>
+
+      <div id="options-container"></div>
+      <p id="result"></p>
+      <button id="next-button" style="display: none; width: 100%;">Další</button>
+    </div>
+  </main>
 
   <footer>
     <p>Spráskáno ve škole v učebně 4 &copy; 2025 Motolský Ajťáci</p>

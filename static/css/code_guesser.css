@@ -17,8 +17,7 @@ html, body {
   color: #fff;
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 /* =====================================
@@ -46,7 +45,8 @@ body::before {
   z-index: 999;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Center the brand and text */
+  padding: 0 10px;
 }
 
 .brand {
@@ -64,6 +64,45 @@ body::before {
   font-size: 1.4rem;
   color: #fff;
   letter-spacing: 1px;
+}
+
+.home-button-container {
+  position: fixed;
+  top: 60px; /* Below the header */
+  right: 10px; /* Align to the right */
+  display: flex;
+  justify-content: flex-end;
+  z-index: 998; /* Below the header */
+}
+
+.home-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: absolute; /* Position the home button absolutely */
+  right: 10px; /* Align to the right */
+}
+
+.home-button:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .home-button {
+    font-size: 1.2rem; /* Smaller button icon */
+  }
+}
+
+.main-content {
+  margin-top: 60px; /* Space below the fixed topbar */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Take up remaining space */
 }
 
 /* =====================================
@@ -88,7 +127,10 @@ footer {
    GAME CONTAINER
 ===================================== */
 .game-container {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1; /* Above the background */
   width: 90%;
   max-width: 800px;
@@ -115,7 +157,7 @@ footer {
 /* =====================================
    HEADER STYLING
 ===================================== */
-h1 {
+.game-container h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   font-weight: 700;
@@ -126,7 +168,7 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  h1 {
+  .game-container h1 {
     font-size: 1.6rem;
   }
 }
@@ -265,30 +307,5 @@ h1 {
   #next-button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
-  }
-}
-
-/* =====================================
-  HOME BUTTON
-===================================== */
-#home-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-#home-button:hover {
-  transform: scale(1.2);
-}
-
-@media (max-width: 768px) {
-  #home-button {
-   font-size: 1.2rem; /* Smaller button icon */
   }
 }
