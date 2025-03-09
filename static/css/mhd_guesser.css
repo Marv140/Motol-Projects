@@ -1,4 +1,3 @@
-Documents\GitHub\Motol-Projects\static\css\mhd_guesser.css */
 /* =====================================
    1) RESET & FULLSCREEN CENTERING
 ===================================== */
@@ -44,7 +43,9 @@ body::before {
   z-index: 999;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Center the brand and text */
+  padding: 0 10px;
+  position: relative; /* Ensure the home button can be positioned absolutely */
 }
 
 .brand {
@@ -62,6 +63,36 @@ body::before {
   font-size: 1.4rem;
   color: #fff;
   letter-spacing: 1px;
+}
+
+.home-button-container {
+  position: fixed;
+  top: 60px; /* Below the header */
+  right: 10px; /* Align to the right */
+  display: flex;
+  justify-content: flex-end;
+  z-index: 998; /* Below the header */
+}
+
+.home-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: absolute; /* Position the home button absolutely */
+  right: 10px; /* Align to the right */
+}
+
+.home-button:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .home-button {
+    font-size: 1.2rem; /* Smaller button icon */
+  }
 }
 
 /* =====================================
@@ -85,6 +116,10 @@ footer {
    5) MAIN COVER GRID
 ===================================== */
 .cover-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 60px; /* Below header */
   bottom: 40px; /* Above footer */
@@ -92,8 +127,6 @@ footer {
   right: 0;
   z-index: 1; /* Behind header/footer */
   overflow: hidden;
-  display: flex;
-  flex-direction: row; /* Default: 3 columns for wide screens */
 }
 
 /* Stack rows on narrower screens */
@@ -107,6 +140,9 @@ footer {
    6) COVER BLOCKS
 ===================================== */
 .cover-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   flex: 1; /* Equal width/height for all */
   overflow: hidden; /* Clip zoomed background */
@@ -163,26 +199,24 @@ footer {
 /* =====================================
    7) BUTTONS & LINKS (OPTIONAL)
 ===================================== */
-.home-button {
-  position: relative;
-  padding: 15px 40px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: linear-gradient(90deg, #ff00cc, #3333ff);
+/* #home-button {
+  background: none;
   border: none;
-  border-radius: 50px;
+  color: #fff;
+  font-size: 1.5rem;
   cursor: pointer;
-  overflow: hidden;
-  transition: background 0.3s, transform 0.2s;
+  transition: transform 0.2s;
 }
 
-.home-button:hover {
-  background: linear-gradient(90deg, #3333ff, #ff00cc);
-  transform: scale(1.1);
+#home-button:hover {
+  transform: scale(1.2);
 }
+
+@media (max-width: 768px) {
+  #home-button {
+    font-size: 1.2rem;
+  }
+} */
 
 /* =====================================
    8) ANSWER BUTTONS
@@ -211,6 +245,43 @@ footer {
   transform: scale(1.1);
 }
 
+/* .button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+} */
+
+.answer-button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#next-button, #try-again-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, #4A90E2, #357ABD); /* Keep the original background */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#next-button, #try-again-button:hover {
+  background: linear-gradient(90deg, #357ABD, #4A90E2); /* Keep the original hover background */
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  #next-button, #try-again-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
 /* =====================================
    9) QUESTION IMAGE
 ===================================== */
@@ -221,4 +292,143 @@ footer {
   margin: 20px auto;
   border: 2px solid #fff;
   border-radius: 10px;
+}
+
+/* Center the game container */
+#game-container {
+  position: relative;
+  z-index: 1; /* Above the background */
+  width: 90%;
+  max-width: 800px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1); /* Glass effect */
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#game-container h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  #game-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* =====================================
+   10) POPUP
+===================================== */
+
+/* Popup styles */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  z-index: 1000; /* Above all other elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.popup-content h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.popup-content .popup-close-button {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 10px 20px; /* Smaller padding */
+  font-size: 1rem; /* Smaller font size */
+  border-radius: 5px; /* Smaller border radius */
+}
+
+.popup-close-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px; /* Smaller padding */
+  font-size: 1rem; /* Smaller font size */
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.popup-close-button:hover {
+  background: linear-gradient(90deg, #3333ff, #ff00cc);
+  transform: scale(1.1);
+}
+
+/* Slide-in animation */
+@keyframes slide-in {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* =====================================
+   11) RESULT TEXT
+===================================== */
+
+.correct-result, .incorrect-result {
+  font-family: inherit; /* Inherit the font family from the parent */
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.correct-result {
+  color: green;
+}
+
+.incorrect-result {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .correct-result, .incorrect-result {
+    font-size: 1rem; /* Reduce font size for result text */
+  }
 }

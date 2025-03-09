@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MHD Guesser</title>
   <link rel="stylesheet" href="/static/css/mhd_guesser.css">
-  <link rel="icon" href="/static/images/icon.png">
+  <link rel="icon" href="/static/images/icon.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <!-- Header -->
@@ -14,27 +15,37 @@
       <img src="/static/images/icon.webp" alt="Logo" class="logo">
       <h1 class="site-title">MHD Guesser</h1>
     </div>
+    <button id="home-button" class="home-button" aria-label="Domů" onclick="window.location.href='/'">
+      <i class="fas fa-home"></i>
+    </button>
   </header>
 
   <!-- Main Content -->
   <main class="cover-grid">
     <!-- Add your content here -->
     <div id="game-container">
-      <h2>MHD Guesser</h2>
+      <h2>Uhádni kde je vyfocena fotka</h2>
       <img id="question-image" src="" alt="MHD Image">
-      <div id="answer-buttons">
-        <button class="answer-button" data-answer="bus">Bus</button>
-        <button class="answer-button" data-answer="tram">Tram</button>
-        <button class="answer-button" data-answer="train">Train</button>
-      </div>
+      <div id="answer-buttons" class="button-container"></div>
       <div id="result"></div>
+      <button id="next-button" style="display: none;">Další</button>
+      <button id="try-again-button" style="display: none;">Zkusit Znovu</button>
     </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Motolský Ajťáci</p>
+    <p>Spráskáno ve škole v učebně 4 &copy; 2025 Motolský Ajťáci</p>
   </footer>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <h2>Pracujeme na tom!</h2>
+      <p>Tato webová stránka je stále ve vývoji. Děkujeme za vaši trpělivost.</p>
+      <button id="close-popup" class="popup-close-button">Zavřít</button>
+    </div>
+  </div>
 
   <script src="/static/js/mhd_guesser.js"></script>
 </body>
