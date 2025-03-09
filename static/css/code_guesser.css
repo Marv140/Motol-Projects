@@ -269,9 +269,9 @@ h1 {
 }
 
 /* =====================================
-   THEME TOGGLE BUTTON
+  HOME BUTTON
 ===================================== */
-#theme-toggle {
+#home-button {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -283,12 +283,12 @@ h1 {
   transition: transform 0.2s;
 }
 
-#theme-toggle:hover {
+#home-button:hover {
   transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
-  #theme-toggle {
-    font-size: 1.2rem; /* Smaller toggle icon */
+  #home-button {
+   font-size: 1.2rem; /* Smaller button icon */
   }
 }

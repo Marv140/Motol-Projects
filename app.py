@@ -9,6 +9,13 @@ app.secret_key = "secret_keySIGMASIGMASKIBIDISIGMAsecret_keysecret_keysecret_key
 
 questions = long_snippets.LONG_QUESTIONS
 
+# Sample public transport questions
+mhd_guesser_questions = [
+    {"image": "/static/images/mhd_guesser/bus.webp", "alt": "Bus", "answer": "bus"},
+    {"image": "/static/images/mhd_guesser/tram.webp", "alt": "Tram", "answer": "tram"},
+    {"image": "/static/images/mhd_guesser/train.webp", "alt": "Train", "answer": "train"}
+]
+
 MAINTENANCE_MODE = False
 
 if MAINTENANCE_MODE == True:
@@ -34,14 +41,13 @@ def index():
 def code_guesser():
     return flask.render_template('code_guesser.html')
 
-@app.route('/public_transport_guesser')
-def public_transport_guesser():
-    return flask.render_template('public_transport_guesser.html')
+@app.route('/mhd_guesser')
+def mhd_guesser():
+    return flask.render_template('mhd_guesser.html')
 
 @app.route('/coming_soon')
 def coming_soon():
     return flask.render_template('coming_soon.html')
-
 
 @app.route("/get-question", methods=["GET"])
 def get_question():
@@ -74,7 +80,7 @@ def get_question():
 def submit_answer():
     data = flask.request.json
     selected_language = data.get("language")
-    correct_language  = data.get("correct_language")
+    correct_language = data.get("correct_language")
 
     if "score" not in flask.session:
         flask.session["score"] = 0
@@ -108,6 +114,56 @@ def submit_answer():
 def reset_quiz():
     flask.session.clear()  # Clear the session to reset progress
     return "", 204  # Respond with no content
+
+@app.route("/get-mhd-question", methods=["GET"])
+def get_mhd_question():
+    if "used_mhd_questions" not in flask.session:
+        flask.session["used_mhd_questions"] = []
+    if "current_mhd_question_index" not in flask.session:
+        flask.session["current_mhd_question_index"] = None
+
+    used = flask.session["used_mhd_questions"]
+    current_idx = flask.session["current_mhd_question_index"]
+    all_indices = list(range(len(mhd_guesser_questions)))
+
+    if current_idx is not None:
+        return flask.jsonify(mhd_guesser_questions[current_idx])
+
+    remaining = [i for i in all_indices if i not in used]
+
+    if not remaining:
+        return flask.jsonify({
+            "result": "All questions completed! Press F5 to restart."
+        })
+
+    chosen_index = random.choice(remaining)
+    flask.session["current_mhd_question_index"] = chosen_index
+
+    return flask.jsonify(mhd_guesser_questions[chosen_index])
+
+@app.route("/submit-mhd-answer", methods=["POST"])
+def submit_mhd_answer():
+    data = flask.request.json
+    answer = data.get("answer").lower()
+    current_idx = flask.session.get("current_mhd_question_index")
+
+    if current_idx is None:
+        return flask.jsonify({"result": "No question to answer."})
+
+    correct_answer = mhd_guesser_questions[current_idx]["answer"]
+
+    if "mhd_score" not in flask.session:
+        flask.session["mhd_score"] = 0
+    if "used_mhd_questions" not in flask.session:
+        flask.session["used_mhd_questions"] = []
+
+    if answer == correct_answer:
+        flask.session["mhd_score"] += 1
+        flask.session["used_mhd_questions"].append(current_idx)
+        flask.session["current_mhd_question_index"] = None
+        return flask.jsonify({"result": "correct", "score": flask.session["mhd_score"]})
+    else:
+        return flask.jsonify({"result": "incorrect", "correct_answer": correct_answer, "score": flask.session["mhd_score"]})
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=25571)

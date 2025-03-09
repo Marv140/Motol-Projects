@@ -1,0 +1,224 @@
+Documents\GitHub\Motol-Projects\static\css\mhd_guesser.css */
+/* =====================================
+   1) RESET & FULLSCREEN CENTERING
+===================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #0f0c29; /* Dark gradient */
+  background: radial-gradient(circle at bottom, #0f0c29, #302b63, #24243e);
+  overflow: hidden; /* No scroll bars */
+  color: #fff;
+  position: relative;
+}
+
+/* =====================================
+   2) PARTICLE BACKGROUND
+===================================== */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/static/images/particles.gif') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2; /* Subtle effect */
+  z-index: 0;
+}
+
+/* =====================================
+   3) FIXED HEADER
+===================================== */
+.topbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.site-title {
+  font-size: 1.4rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* =====================================
+   4) FIXED FOOTER
+===================================== */
+footer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.85rem;
+  z-index: 999;
+}
+
+/* =====================================
+   5) MAIN COVER GRID
+===================================== */
+.cover-grid {
+  position: absolute;
+  top: 60px; /* Below header */
+  bottom: 40px; /* Above footer */
+  left: 0;
+  right: 0;
+  z-index: 1; /* Behind header/footer */
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; /* Default: 3 columns for wide screens */
+}
+
+/* Stack rows on narrower screens */
+@media (max-width: 1023px) {
+  .cover-grid {
+    flex-direction: column;
+  }
+}
+
+/* =====================================
+   6) COVER BLOCKS
+===================================== */
+.cover-block {
+  position: relative;
+  flex: 1; /* Equal width/height for all */
+  overflow: hidden; /* Clip zoomed background */
+}
+
+.cover-grid a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use parent text color */
+}
+
+.cover-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-url) center center / cover no-repeat;
+  z-index: 1;
+  transform: scale(1);
+  transition: transform 0.7s ease;
+}
+
+/* Hover Zoom Effect */
+.cover-block:hover::before {
+  transform: scale(1.1);
+}
+
+/* Dark overlay for text clarity */
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+/* Centered Text */
+.cover-text {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cover-text h2 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+}
+
+/* =====================================
+   7) BUTTONS & LINKS (OPTIONAL)
+===================================== */
+.home-button {
+  position: relative;
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.home-button:hover {
+  background: linear-gradient(90deg, #3333ff, #ff00cc);
+  transform: scale(1.1);
+}
+
+/* =====================================
+   8) ANSWER BUTTONS
+===================================== */
+#answer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.answer-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: #3333ff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.answer-button:hover {
+  background: #ff00cc;
+  transform: scale(1.1);
+}
+
+/* =====================================
+   9) QUESTION IMAGE
+===================================== */
+#question-image {
+  display: block;
+  max-width: 80%;
+  max-height: 300px;
+  margin: 20px auto;
+  border: 2px solid #fff;
+  border-radius: 10px;
+}
