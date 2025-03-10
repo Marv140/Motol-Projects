@@ -234,7 +234,7 @@ footer {
   font-weight: bold;
   color: #fff;
   background: #3333ff;
-  /* background: linear-gradient(90deg, #ff00cc, #3333ff); */
+  /* background: linear-gradient(90deg, #ff00cc, #3333ff); */ /* Background same as code_guesser option buttons */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -243,7 +243,7 @@ footer {
 
 .answer-button:hover {
   background: #ff00cc;
-  /* background: linear-gradient(90deg, #3333ff, #ff00cc); */
+  /* background: linear-gradient(90deg, #3333ff, #ff00cc); */ /* Background same as code_guesser option buttons */
   transform: scale(1.1);
 }
 
@@ -265,7 +265,7 @@ footer {
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(90deg, #4A90E2, #357ABD); /* Keep the original background */
+  background: linear-gradient(90deg, #4A90E2, #357ABD);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -273,7 +273,7 @@ footer {
 }
 
 #next-button:hover, #try-again-button:hover {
-  background: linear-gradient(90deg, #357ABD, #4A90E2); /* Keep the original hover background */
+  background: linear-gradient(90deg, #357ABD, #4A90E2);
   transform: scale(1.1);
 }
 
