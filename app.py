@@ -15,16 +15,22 @@ MHD_IMAGE_DIR = 'static/images/mhd_guesser'
 
 # List of Czech cities with folder names
 czech_cities = [
-    ("Praha", "praha"),
     ("Brno", "brno"),
-    ("Ostrava", "ostrava"),
-    ("Plzeň", "plzen"),
+    ("České Budějovice", "ceske_budejovice"),
+    ("Chomutov", "chomutov"),
+    ("Děčín", "decin"),
+    ("Hradec Králové", "hradec_kralove"),
+    ("Jihlava", "jihlava"),
+    ("Karlovy Vary", "karlovy_vary"),
     ("Liberec", "liberec"),
     ("Olomouc", "olomouc"),
-    ("České Budějovice", "ceske_budejovice"),
-    ("Hradec Králové", "hradec_kralove"),
+    ("Ostrava", "ostrava"),
+    ("Pardubice", "pardubice"),
+    ("Plzeň", "plzen"),
+    ("Praha", "praha"),
+    ("Teplice", "teplice"),
     ("Ústí nad Labem", "usti_nad_labem"),
-    ("Pardubice", "pardubice")
+    ("Zlín", "zlin")
 ]
 
 def get_mhd_images():
