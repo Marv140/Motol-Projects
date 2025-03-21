@@ -107,9 +107,9 @@ def code_guesser():
 def mhd_guesser():
     return flask.render_template('mhd_guesser.html')
 
-@app.route('/coming_soon')
-def coming_soon():
-    return flask.render_template('coming_soon.html')
+@app.route('/tictactoe')
+def tictactoe():
+    return flask.render_template('tictactoe.html')
 
 @app.route("/get-question", methods=["GET"])
 def get_question():

@@ -1,0 +1,361 @@
+        /* =====================================
+           RESET & FULLSCREEN CENTERING
+        ===================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: #0f0c29; /* Dark gradient */
+            background: radial-gradient(circle at bottom, #0f0c29, #302b63, #24243e);
+            overflow: hidden; /* No scroll bars */
+            color: #fff;
+            position: relative;
+        }
+
+        /* =====================================
+           PARTICLE BACKGROUND
+        ===================================== */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            opacity: 0.2; /* Subtle effect */
+            z-index: 0;
+        }
+
+        /* =====================================
+           FIXED HEADER
+        ===================================== */
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the brand and text */
+            padding: 0 10px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .site-title {
+            font-size: 1.4rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .home-button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: absolute; /* Position the home button absolutely */
+            right: 10px; /* Align to the right */
+        }
+
+        .home-button:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .home-button {
+                font-size: 1.2rem; /* Smaller button icon */
+            }
+        }
+
+        /* =====================================
+           FIXED FOOTER
+        ===================================== */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 0.85rem;
+            z-index: 999;
+        }
+
+        /* =====================================
+           GAME CONTAINER
+        ===================================== */
+        .main-content {
+            margin-top: 60px; /* Space below the fixed topbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); /* Full height minus header and footer */
+            width: 100%;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .game-container {
+            position: relative;
+            z-index: 1; /* Above the background */
+            width: 90%;
+            max-width: 800px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1); /* Glass effect */
+            border-radius: 16px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .game-container h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px #ff0099, 0 0 20px #ff0099, 0 0 30px #ff0099;
+            margin-bottom: 1rem;
+        }
+
+        /* =====================================
+           GAME BOARD
+        ===================================== */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(15, 1fr);
+            gap: 2px;
+            margin: 20px auto;
+            max-width: 100%;
+            overflow: auto;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cell:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .cell.x {
+            color: #ff00cc;
+            text-shadow: 0 0 5px #ff00cc;
+        }
+
+        .cell.o {
+            color: #3333ff;
+            text-shadow: 0 0 5px #3333ff;
+        }
+
+        /* Game status bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .player-turn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .player-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .player-x {
+            color: #ff00cc;
+        }
+
+        .player-o {
+            color: #3333ff;
+        }
+
+        /* Game controls */
+        .game-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .control-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .control-button:hover {
+            transform: scale(1.05);
+        }
+
+        .restart-button {
+            background: linear-gradient(90deg, #ff00cc, #3333ff);
+            color: #fff;
+        }
+
+        .restart-button:hover {
+            background: linear-gradient(90deg, #3333ff, #ff00cc);
+        }
+
+        /* Game win announcement */
+        .win-message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Settings panel */
+        .settings-panel {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .settings-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .settings-label {
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 1rem;
+            }
+
+            .game-container h1 {
+                font-size: 1.6rem;
+            }
+
+            .cell {
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+            }
+
+            .win-message {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 480px) {
+            .cell {
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
+            }
+
+            .game-controls {
+                flex-direction: column;
+            }
+        }
+
+        /* Winning line highlight */
+        .win-line {
+            background: rgba(255, 215, 0, 0.3) !important; /* Gold highlight with transparency */
+        }
+
+        /* Score display */
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .score-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Win counter styles */
+        .x-wins {
+            color: #ff00cc;
+        }
+
+        .o-wins {
+            color: #3333ff;
+        }
+
+        .draws {
+            color: #cccccc;
+        }
